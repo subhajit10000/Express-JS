@@ -120,6 +120,48 @@ app.put('/users/:id', (req, res) => {
 });
 
 
+
+
+//DELETE Method
+app.delete('/users/:id', (req, res) => {
+    const id = Number(req.params.id);
+
+    // Find user index
+    const userIndex = mock.findIndex(user => user.id === id);
+
+    // Check if user exists
+    if (userIndex === -1) {
+        return res.json({
+            status: "failed",
+            message: "User not found"
+        });
+    }
+
+    // Remove user
+    const deletedUser = mock.splice(userIndex, 1);
+
+    // Save updated data
+    fs.writeFile('./mock.json', JSON.stringify(mock), (err) => {
+
+    if (err) {
+        return res.json({
+                status: "failed",
+                message: "Error deleting user"
+        });
+    }
+
+    res.json({
+        status: "success",
+        message: "User deleted successfully",
+        data: mock
+        });
+
+    });
+
+});
+
+
+
 // SERVER RESPONSE
 app.listen(PORT, ()=>{
     console.log(`done at http://localhost:${PORT}/users`);
