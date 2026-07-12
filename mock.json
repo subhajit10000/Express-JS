@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "name": "subhajit",
+    "job": "AI Engineer",
+    "email": "subhajit1@gmail.com"
+  },
+  {
+    "id": 2,
+    "name": "soumajit",
+    "job": "Software Engineer"
+  }
+]
