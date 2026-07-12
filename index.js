@@ -1,18 +1,41 @@
-
-
 const express = require('express')
+const fs = require('fs')
 const app = express()
-const PORT = 3000;
+const PORT = 5000;
+app.use(express.json());
+const mock = require("./mock.json")
 
-app.use(express.json())
 
-app.post('/user', (req,res) => {
-    console.log(req.body);
-    
-    res.send("hello world");
+
+// GET Method
+app.get('/users', (req,res) => {
+    res.send(mock);
 })
 
+
+
+//POST Method
+app.post('/users', (req,res)=>{
+    const body = req.body;
+    mock.push({...body})
+    fs.writeFile('./mock.json', JSON.stringify(mock), (err,data)=>{
+        if (err) {
+            return res.json({"status": "failed"})
+        } else {
+            res.json({
+                "status": "success",
+                "data": mock
+                    })
+                }
+        })
+})
+
+
+
+
+
+
+// SERVER RESPONSE
 app.listen(PORT, ()=>{
-    console.log(`done at http://localhost:${PORT}/user`);
-    
-})
+    console.log(`done at http://localhost:${PORT}/users`);
+    }) 
