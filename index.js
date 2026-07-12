@@ -33,6 +33,47 @@ app.post('/users', (req,res)=>{
 
 
 
+//PATCH Method
+app.patch('/users/:id', (req, res) => {
+    const id = Number(req.params.id);
+    const body = req.body;
+
+    // Find user index
+    const userIndex = mock.findIndex(user => user.id === id);
+
+    // User not found
+    if (userIndex === -1) {
+        return res.json({
+             status: "failed",
+            message: "User not found"
+        });
+    }
+
+    // Update user
+    mock[userIndex] = {
+    ...mock[userIndex],
+    ...body
+    };
+
+    // Save updated data
+    fs.writeFile('./mock.json', JSON.stringify(mock), (err,data) => {
+
+        if (err) {
+            return res.json({
+                    status: "failed"
+                    });
+        }
+
+        res.json({
+            status: "success",
+            message: "User updated successfully",
+            data: mock
+        });
+
+    });
+
+});
+
 
 
 // SERVER RESPONSE
