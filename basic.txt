@@ -1,1 +1,23 @@
+Setup Guide:-
+------------------
 
+create a folder
+
+write command "npm init -y"
+
+create index.js file manually
+
+then command "npm i exprss"
+
+
+concept:-  
+-----------
+     1   express() initializes the server 
+     2   app.get() defines a get method
+     3   req and res handle request and response  
+     4   app.listen() start the server
+     5.  only the get method we can check in browser
+     6.  POST method use to create new data on server, uses in Signup, login, register etc..
+     7.  PUT method is use to update the existing data
+     8.  PATCH method is use to add a new user data in a file. Same thing we can do with PUT method with slight modifications
+     9.  DELETE methode is use to delete the entire user data from a file.
